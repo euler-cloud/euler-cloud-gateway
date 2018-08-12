@@ -1,0 +1,20 @@
+spring:
+ application:
+  name: api-gateway
+
+server:
+  port: 10001
+
+security:
+  oauth2:
+    resource:
+      id: DEFAULT
+      user-info-uri: http://localhost:8080/uc/oauth/user_info
+      token-info-uri: http://localhost:8080/uc/oauth/check_token
+      prefer-token-info: false
+    client:
+      client-id: default
+      client-secret: default
+
+#zuul.routes.app1.path=/app1/**
+#zuul.routes.app1.url=http://localhost:60001
