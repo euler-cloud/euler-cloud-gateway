@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
 
-java -jar app.jar
+java ${JAVA_OPTS} \
+-jar app.jar
