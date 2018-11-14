@@ -7,7 +7,7 @@ COPY run.sh /app/run.sh
 
 RUN chmod -R 755 /app
 
-EXPOSE 10001
+EXPOSE 8080
 
 WORKDIR /app
 
