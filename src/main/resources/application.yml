@@ -1,6 +1,6 @@
 spring:
  application:
-  name: api-gateway
+  name: euler-cloud-gateway
 
 server:
   port: 8080
@@ -15,6 +15,3 @@ security:
     client:
       client-id: default
       client-secret: default
-
-#zuul.routes.app1.path=/app1/**
-#zuul.routes.app1.url=http://localhost:60001
