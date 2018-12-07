@@ -1,5 +1,6 @@
 package net.eulerframework.cloud.gateway;
 
+import org.eulerframework.cloud.EnableEulerCloud;
 import org.eulerframework.cloud.security.filter.AuthenticationZuulFilter;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -7,6 +8,7 @@ import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 import org.springframework.context.annotation.Bean;
 
 @EnableZuulProxy
+@EnableEulerCloud
 @SpringBootApplication
 public class EulerCloudGatewayApplication {
 
