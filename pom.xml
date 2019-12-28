@@ -38,8 +38,13 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-zuul</artifactId>
+            <groupId>org.eulerframework.cloud</groupId>
+            <artifactId>euler-cloud-starter</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
 
         <dependency>
@@ -49,12 +54,12 @@
 
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-oauth2</artifactId>
+            <artifactId>spring-cloud-starter-netflix-zuul</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>org.eulerframework.cloud</groupId>
-            <artifactId>euler-cloud-starter</artifactId>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-oauth2</artifactId>
         </dependency>
         <dependency>
             <groupId>org.eulerframework</groupId>
@@ -66,6 +71,7 @@
             <artifactId>spring-boot-devtools</artifactId>
             <scope>runtime</scope>
         </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>

@@ -1,5 +1,23 @@
 server:
   port: 8080
+  compression:
+    enabled: true
+  tomcat:
+    uri-encoding: UTF-8
+    max-http-form-post-size: 100MB
+    max-swallow-size: 50MB
+    max-connections: 10000
+    accept-count: 200
+    max-threads: 200
+    min-spare-threads: 4
+    accesslog:
+      enabled: true
+      buffered: true
+      directory: ${logging.file.path}/tomcat
+      pattern: common
+      rotate: true
+      prefix: access_log
+      suffix: .log
 
 spring:
   application:
@@ -9,6 +27,9 @@ spring:
       max-file-size: 50MB
       max-request-size: 100MB
 
+logging:
+  file:
+    path: /var/log/${spring.application.name}
 
 eureka:
   client:
