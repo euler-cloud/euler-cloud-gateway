@@ -15,37 +15,45 @@
  */
 package net.eulerframework.cloud.gateway;
 
-import net.eulerframework.cloud.gateway.conf.EulerGatewayOAuth2ResourceServerProperties;
+import org.eulerframework.boot.autoconfigure.support.security.EulerBootSecurityProperties;
 import org.eulerframework.cloud.security.filter.AuthenticationZuulFilter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
-import org.springframework.util.CollectionUtils;
+
+import java.util.Arrays;
 
 @Configuration
 @EnableResourceServer
 public class OAuthConfiguration extends ResourceServerConfigurerAdapter {
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
-    private EulerGatewayOAuth2ResourceServerProperties eulerGatewayOAuth2ResourceServerProperties;
+    private EulerBootSecurityProperties eulerBootSecurityProperties;
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
-        if (!CollectionUtils.isEmpty(eulerGatewayOAuth2ResourceServerProperties.getIgnoredPatterns())) {
-            http.authorizeRequests()
-                    .antMatchers(eulerGatewayOAuth2ResourceServerProperties.getIgnoredPatterns().toArray(new String[0])).permitAll();
-        }
+        String[] ignoredPatterns = this.eulerBootSecurityProperties.getIgnoredPatterns();
+        if(ignoredPatterns != null && ignoredPatterns.length > 0) {
+            if(this.logger.isInfoEnabled()) {
+                this.logger.info("config resource server ignored patterns: {}", Arrays.toString(ignoredPatterns));
+            }
 
-        http.authorizeRequests().anyRequest().authenticated();
+            http.authorizeRequests()
+                    .antMatchers(ignoredPatterns).permitAll()
+                    .anyRequest().authenticated();
+        } else {
+            http.authorizeRequests().anyRequest().authenticated();
+        }
     }
 
     @Bean
     public AuthenticationZuulFilter authenticationZuulFilter() {
-        return new AuthenticationZuulFilter(
-                CollectionUtils.isEmpty(eulerGatewayOAuth2ResourceServerProperties.getIgnoredPatterns()) ?
-                        null : eulerGatewayOAuth2ResourceServerProperties.getIgnoredPatterns().toArray(new String[0]));
+        return new AuthenticationZuulFilter(this.eulerBootSecurityProperties.getIgnoredPatterns());
     }
 }
