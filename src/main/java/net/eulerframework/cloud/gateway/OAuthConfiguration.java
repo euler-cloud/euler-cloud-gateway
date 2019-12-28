@@ -15,11 +15,28 @@
  */
 package net.eulerframework.cloud.gateway;
 
+import net.eulerframework.cloud.gateway.conf.EulerGatewayOAuth2ResourceServerProperties;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
+import org.springframework.util.CollectionUtils;
 
 @Configuration
 @EnableResourceServer
 public class OAuthConfiguration extends ResourceServerConfigurerAdapter {
+
+    @Autowired
+    private EulerGatewayOAuth2ResourceServerProperties eulerGatewayOAuth2ResourceServerProperties;
+
+    @Override
+    public void configure(HttpSecurity http) throws Exception {
+        if(!CollectionUtils.isEmpty(eulerGatewayOAuth2ResourceServerProperties.getIgnoredPatterns())) {
+            http.authorizeRequests()
+                    .antMatchers(eulerGatewayOAuth2ResourceServerProperties.getIgnoredPatterns().toArray(new String[0])).permitAll();
+        }
+
+        http.authorizeRequests().anyRequest().authenticated();
+    }
 }
