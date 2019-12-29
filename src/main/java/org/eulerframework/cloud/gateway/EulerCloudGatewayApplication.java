@@ -1,9 +1,8 @@
-package net.eulerframework.cloud.gateway;
+package org.eulerframework.cloud.gateway;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 
 @EnableZuulProxy
 @SpringBootApplication

@@ -1,4 +1,4 @@
-package net.eulerframework.cloud.gateway;
+package org.eulerframework.cloud.gateway;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

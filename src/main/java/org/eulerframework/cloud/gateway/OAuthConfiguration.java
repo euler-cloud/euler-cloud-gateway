@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.eulerframework.cloud.gateway;
+package org.eulerframework.cloud.gateway;
 
 import org.eulerframework.boot.autoconfigure.support.security.EulerBootSecurityProperties;
 import org.eulerframework.cloud.security.filter.AuthenticationZuulFilter;
